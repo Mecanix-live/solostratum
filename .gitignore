@@ -1,0 +1,6 @@
+.settings/*
+.cproject
+.project
+Makefile_cross-compile
+*.c.bak
+*.h.bak
