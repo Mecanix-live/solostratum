@@ -348,6 +348,20 @@
         
         let instanceName = 'default';
 
+		function formatDifficulty(difficulty) {
+			if (!difficulty) return '-';
+
+			if (difficulty < 1e9) {
+				return (difficulty / 1e6).toFixed(2) + ' M'; // Megahash
+			} else if (difficulty < 1e12) {
+				return (difficulty / 1e9).toFixed(2) + ' G'; // Gigahash
+			} else if (difficulty < 1e15) {
+				return (difficulty / 1e12).toFixed(2) + ' T'; // Terahash
+			} else {
+				return (difficulty / 1e15).toFixed(2) + ' P'; // Petahash
+			}
+		}
+
         function formatHashrate(hashrate) {
             if (hashrate < 0.001) return '< 0.001 TH/s';
             if (hashrate < 1) return (hashrate * 1000).toFixed(2) + ' GH/s';
@@ -382,8 +396,7 @@
         function updateStatsGrid(data) {
             document.getElementById('blocks-count').textContent = data.blocks_found || 0;
             document.getElementById('active-workers').textContent = data.active_workers || 0;
-            document.getElementById('network-diff').textContent = 
-                data.network_difficulty ? (data.network_difficulty / 1e12).toFixed(2) + ' T' : '-';
+            document.getElementById('network-diff').textContent = formatDifficulty(data.network_difficulty);
             document.getElementById('height').textContent = data.current_height || '-';
             
             document.getElementById('current-height').textContent = 
