@@ -978,7 +978,7 @@ bool is_blockchain_synced(void) {
     json_decref(result);
 
     // Consider synced when verification progress is extremely close to 1.0
-    bool synced = (verification_progress >= 0.999999) && headers_match && ibd_false;
+    bool synced = (verification_progress >= 0.99) && headers_match && ibd_false;
 
     if (!synced) {
         log_msg(LOG_WARN, "Node not fully synced yet (progress=%.10f)", verification_progress);
